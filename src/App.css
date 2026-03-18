@@ -1,0 +1,118 @@
+#root {
+  width: 100%;
+}
+
+/* HEADER */
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px 80px;
+  background-color: var(--azul);
+  border-bottom: 1px solid rgba(255,255,255,0.2);
+}
+
+header h2 {
+  color: white;
+  font-size: 30px;
+  font-family: "Playfair Display", serif;
+}
+
+nav {
+  display: flex;
+  gap: 32px;
+}
+
+nav a {
+  color: white;
+  font-size: 16px;
+  position: relative;
+  padding-bottom: 4px;
+}
+
+/* hover elegante */
+
+nav a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 0%;
+  height: 2px;
+  background: var(--terracota);
+  transition: 0.3s;
+}
+
+nav a:hover::after {
+  width: 100%;
+}
+
+/* SEÇÕES */
+
+section {
+  padding: 80px;
+  margin: 60px auto;
+  max-width: 1000px;
+
+  background-color: white;
+
+  border-radius: 20px;
+
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+}
+
+/* TITULOS */
+
+section h1,
+section h2 {
+  color: var(--azul);
+  font-family: "Playfair Display", serif;
+  margin-bottom: 18px;
+}
+
+section h1 {
+  font-size: 48px;
+}
+
+section h2 {
+  font-size: 34px;
+  position: relative;
+  display: inline-block;
+}
+
+/* LINHA DECORATIVA */
+
+section h2::after {
+  content: "";
+  display: block;
+  width: 60px;
+  height: 2px;
+  background: var(--terracota);
+  margin-top: 10px;
+}
+
+/* TEXTO */
+
+section p {
+  max-width: 650px;
+  line-height: 1.7;
+  font-size: 16px;
+}
+
+/* HOVER SUAVE */
+
+section:hover {
+  transform: translateY(-3px);
+  transition: 0.25s ease;
+}
+
+.home-texto {
+  position: relative;
+}
+
+.icone-flor {
+  width: 40px;
+  display: block;
+  margin: 10px auto 0;
+}
