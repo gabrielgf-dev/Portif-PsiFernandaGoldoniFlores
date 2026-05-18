@@ -5,9 +5,8 @@ function Sobre() {
         <h2>Sobre mim</h2>
 
         <p>
-          Sou psicóloga em formação clínica, com orientação psicanalítica.
-          Tenho interesse em escutar e compreender como cada sujeito constrói sua história e lida com seus sofrimentos.
-          Na clínica, também me dedico a refletir sobre as experiências das mulheres e sobre como as expectativas sociais influenciam a forma de viver e se perceber.
+           Sou psicóloga clínica, com orientação psicanalítica, e acredito na importância de uma escuta cuidadosa, voltada à singularidade de quem busca esse espaço. Me interessa compreender como cada um constrói sua história, atravessa seus conflitos e busca, à sua maneira, lidar com aquilo que causa sofrimento. Na clínica, também reflito sobre as experiências das mulheres e sobre a forma como a cultura e as expectativas sociais influenciam a maneira como cada um vive, sente e se percebe.
+Procuro construir um espaço em que cada um possa atribuir novos sentidos à própria história.
         </p>
       </div>
 

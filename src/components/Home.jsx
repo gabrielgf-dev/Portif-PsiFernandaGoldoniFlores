@@ -5,10 +5,10 @@ function Home() {
       <div className="home-texto">
         <p className="subtitulo">Psicóloga Clínica</p>
 
-        <h1>Fernanda G Flores</h1>
-
+        <h1>Fernanda</h1>
+        <h2>Goldoni Flores</h2>
         <p>
-          Um espaço de acolhimento, escuta e cuidado emocional.
+          Um cuidado construído pela escuta.
         </p>
 
         <button>Agendar consulta</button>

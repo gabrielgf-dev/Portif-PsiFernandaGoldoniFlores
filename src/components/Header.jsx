@@ -8,11 +8,11 @@ function Header() {
       />
 
       <nav>
-        <a>Home</a>
-        <a>Sobre</a>
-        <a>Atendimentos</a>
-        <a>Contato</a>
-      </nav>
+  <a href="#home">Home</a>
+  <a href="#sobre">Sobre</a>
+  <a href="#atendimento">Atendimento</a>
+  <a href="#contato">Contato</a>
+</nav>
     </header>
   )
 }

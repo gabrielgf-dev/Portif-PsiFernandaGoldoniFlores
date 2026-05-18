@@ -146,24 +146,26 @@ section p {
 ========================= */
 
 .sobre {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  position: relative;
 
-  gap: 48px;
+  overflow: visible;
+
+  min-height: 320px;
 }
 
 .sobre-texto {
-  flex: 1;
+  padding-left: 220px;
 }
 
 .foto-sobre {
-  width: 60%;
+  position: absolute;
+
+  left: 0;
+  bottom: 0;
+
+  width: 260px;
+
   height: auto;
-
-  object-fit: contain;
-
-  animation: fadeIntro 2.2s ease;
 }
 
 /* =========================
@@ -264,4 +266,52 @@ button:hover {
   transform: translateY(-2px);
 
   opacity: 0.92;
+}
+/* =========================
+   WAVES HEADER
+========================= */
+
+header {
+  position: relative;
+  overflow: hidden;
+}
+
+header::before {
+  content: "";
+
+  position: absolute;
+
+  right: -120px;
+  top: -80px;
+
+  width: 420px;
+  height: 420px;
+
+  border: 2px solid rgba(255,255,255,0.08);
+
+  border-radius: 45% 55% 60% 40% / 40% 40% 60% 60%;
+
+  transform: rotate(12deg);
+
+  pointer-events: none;
+}
+
+header::after {
+  content: "";
+
+  position: absolute;
+
+  right: -80px;
+  top: -40px;
+
+  width: 320px;
+  height: 320px;
+
+  border: 2px solid rgba(255,255,255,0.06);
+
+  border-radius: 60% 40% 45% 55% / 55% 35% 65% 45%;
+
+  transform: rotate(-8deg);
+
+  pointer-events: none;
 }
