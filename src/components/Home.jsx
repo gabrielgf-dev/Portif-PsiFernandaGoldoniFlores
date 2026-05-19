@@ -16,7 +16,7 @@ function Home() {
 
       <div className="home-imagem">
         <img
-          src="/Port-PsiFernandaGFlores/FerHome.png"
+          src="/Port-PsiFernandaGFlores/public/FerHome.webp"
           className="foto-home"
           alt="Fernanda"
         />

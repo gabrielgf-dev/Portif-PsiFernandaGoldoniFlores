@@ -8,7 +8,7 @@ function Atendimento() {
       </p>
 
       <img
-        src="/Port-PsiFernandaGFlores/logo.png"
+        src="/Port-PsiFernandaGFlores/logo.webp"
         className="icone-card"
         alt="Logo"
       />

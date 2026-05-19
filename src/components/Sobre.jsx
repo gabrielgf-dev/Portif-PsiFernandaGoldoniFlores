@@ -11,7 +11,7 @@ Procuro construir um espaço em que cada um possa atribuir novos sentidos à pr�
       </div>
 
       <img
-        src="/Port-PsiFernandaGFlores/FerSobre.png"
+        src="/Port-PsiFernandaGFlores/FerSobre.webp"
         className="foto-sobre"
         alt="Fernanda"
       />
