@@ -5,11 +5,7 @@ function Contato() {
 
       <p>Contato: WhatsApp - (67) 9 9890-1011 ou Instagram - @fernandagoldonif</p>
 
-      <img
-        src="/Port-PsiFernandaGFlores/logo.webp"
-        className="icone-card"
-        alt="Logo"
-      />
+    
     </section>
   )
 }

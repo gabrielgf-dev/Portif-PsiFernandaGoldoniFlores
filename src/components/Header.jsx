@@ -2,13 +2,18 @@ function Header() {
   return (
     <header>
       <img
+        src="/Port-PsiFernandaGFlores/wave.png"
+        className="header-wave-img"
+        alt=""
+      />
+
+      <img
         src="/Port-PsiFernandaGFlores/logo.webp"
         className="logo"
         alt="Logo Fernanda G Flores"
       />
 
       <nav>
-        
         <a href="#home">Home</a>
         <a href="#sobre">Sobre</a>
         <a href="#atendimento">Atendimento</a>

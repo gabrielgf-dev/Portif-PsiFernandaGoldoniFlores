@@ -7,11 +7,6 @@ function Atendimento() {
         Os atendimentos acontecem de forma online, via Google Meet ou videochamada pelo WhatsApp, com disponibilidade em diferentes períodos do dia, possibilitando maior flexibilidade nos atendimentos.
       </p>
 
-      <img
-        src="/Port-PsiFernandaGFlores/logo.webp"
-        className="icone-card"
-        alt="Logo"
-      />
     </section>
   )
 }

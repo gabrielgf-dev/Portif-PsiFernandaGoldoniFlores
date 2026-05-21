@@ -23,35 +23,35 @@ header {
   padding: 24px 80px;
 
   background-color: var(--azul);
-
   border-bottom: 1px solid rgba(255,255,255,0.2);
 }
 
 .logo {
   width: 150px;
+
+  position: relative;
+  z-index: 2;
 }
 
 nav {
   display: flex;
   gap: 32px;
+
+  position: relative;
+  z-index: 2;
 }
 
 nav a {
   color: white;
   font-size: 16px;
+  text-decoration: none;
 
   position: relative;
-
   padding-bottom: 4px;
-
-  text-decoration: none;
 }
-
-/* Hover */
 
 nav a::after {
   content: "";
-
   position: absolute;
 
   left: 0;
@@ -61,7 +61,6 @@ nav a::after {
   height: 2px;
 
   background: var(--terracota);
-
   transition: 0.3s;
 }
 
@@ -69,30 +68,18 @@ nav a:hover::after {
   width: 100%;
 }
 
-/* =========================
-   WAVES HEADER
-========================= */
-
-.header-waves {
+.header-wave-img {
   position: absolute;
 
-  right: -140px;
-  top: -35px;
+  right: -120px;
+  top: -40px;
 
-  width: 560px;
-  height: 260px;
+  width: 700px;
 
-  opacity: 0.16;
+  opacity: 0.10;
 
   pointer-events: none;
-}
-
-.header-waves path {
-  fill: none;
-
-  stroke: white;
-
-  stroke-width: 1.4;
+  z-index: 0;
 }
 
 /* =========================
@@ -106,13 +93,10 @@ section {
   padding: 80px;
 
   background-color: white;
-
   border-radius: 20px;
 
   box-shadow: 0 10px 25px rgba(0,0,0,0.08);
 }
-
-/* Hover suave */
 
 section:hover {
   transform: translateY(-3px);
@@ -120,7 +104,7 @@ section:hover {
 }
 
 /* =========================
-   TITULOS
+   TÍTULOS
 ========================= */
 
 section h1,
@@ -141,15 +125,11 @@ section h2 {
   font-size: 40px;
 
   position: relative;
-
   display: inline-block;
 }
 
-/* Linha decorativa */
-
 section h2::after {
   content: "";
-
   display: block;
 
   width: 60px;
@@ -185,7 +165,6 @@ section p {
 
 .home-texto {
   flex: 1;
-
   position: relative;
 }
 
@@ -230,16 +209,7 @@ section p {
   bottom: 0;
 
   width: 260px;
-
   height: auto;
-}
-
-/* =========================
-   ÍCONES
-========================= */
-
-.icone-card {
-  width: 28px;
 }
 
 /* =========================
@@ -259,7 +229,6 @@ button {
   color: white;
 
   font-family: "DM Sans", sans-serif;
-
   font-size: 15px;
   font-weight: 500;
 
@@ -272,34 +241,7 @@ button {
 
 button:hover {
   transform: translateY(-2px);
-
   opacity: 0.92;
-}
-
-/* =========================
-   ANIMAÇÕES
-========================= */
-
-@keyframes aparecerFoto {
-  from {
-    opacity: 0;
-    transform: translateX(40px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes fadeIntro {
-  from {
-    opacity: 0;
-  }
-
-  to {
-    opacity: 1;
-  }
 }
 
 /* =========================
@@ -309,9 +251,7 @@ button:hover {
 @media (max-width: 768px) {
   header {
     flex-direction: column;
-
     gap: 20px;
-
     padding: 24px;
   }
 
@@ -321,9 +261,7 @@ button:hover {
 
   nav {
     gap: 18px;
-
     flex-wrap: wrap;
-
     justify-content: center;
   }
 
@@ -331,9 +269,15 @@ button:hover {
     font-size: 14px;
   }
 
+  .header-wave-img {
+    width: 420px;
+    right: -180px;
+    top: -20px;
+    opacity: 0.08;
+  }
+
   section {
     margin: 32px 16px;
-
     padding: 36px 24px;
   }
 
@@ -351,7 +295,6 @@ button:hover {
 
   .home {
     flex-direction: column;
-
     text-align: center;
   }
 
@@ -361,7 +304,6 @@ button:hover {
 
   .foto-home {
     width: 100%;
-
     max-width: 280px;
   }
 
@@ -382,8 +324,13 @@ button:hover {
 
     margin: 28px auto 0;
   }
+}
 
-  .header-waves {
-    display: none;
-  }
+section p {
+  max-width: 650px;
+
+  line-height: 1.8;
+  font-size: 16px;
+
+  text-align: justify;
 }
