@@ -11,7 +11,7 @@ function Home() {
           Um cuidado construído pela escuta.
         </p>
 
-        <button>Agendar consulta</button>
+        <button>Agendar horário</button>
       </div>
 
       <div className="home-imagem">

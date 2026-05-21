@@ -1,12 +1,7 @@
 function Header() {
   return (
     <header>
-      <img
-        src="/Port-PsiFernandaGFlores/wave.png"
-        className="header-wave-img"
-        alt=""
-      />
-
+      
       <img
         src="/Port-PsiFernandaGFlores/logo.webp"
         className="logo"
