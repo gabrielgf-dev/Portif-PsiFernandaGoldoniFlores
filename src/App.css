@@ -334,3 +334,33 @@ section p {
 
   text-align: justify;
 }
+.botao-whats {
+  display: inline-block;
+
+  margin-top: 28px;
+
+  padding: 14px 28px;
+
+  border-radius: 14px;
+
+  background-color: var(--terracota);
+
+  color: white;
+
+  text-decoration: none;
+
+  font-family: "DM Sans", sans-serif;
+
+  font-size: 15px;
+  font-weight: 500;
+
+  transition: 0.3s ease;
+
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+}
+
+.botao-whats:hover {
+  transform: translateY(-2px);
+
+  opacity: 0.92;
+}

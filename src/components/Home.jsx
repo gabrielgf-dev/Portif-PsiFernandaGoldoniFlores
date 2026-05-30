@@ -11,7 +11,14 @@ function Home() {
           Um cuidado construído pela escuta.
         </p>
 
-        <button>Agendar horário</button>
+        <a
+  href="https://wa.me/5567998901011"
+  target="_blank"
+  rel="noopener noreferrer"
+  className="botao-whats"
+>
+  Agendar horário
+</a>
       </div>
 
       <div className="home-imagem">
