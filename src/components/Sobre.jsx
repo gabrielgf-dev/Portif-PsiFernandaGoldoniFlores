@@ -10,7 +10,7 @@ function Sobre() {
       </div>
 
       <img
-        src="/Port-PsiFernandaGFlores/FerSobre.webp"
+        src="/Portif-PsiFernandaGoldoniFlores/FerSobre.webp"
         className="foto-sobre"
         alt="Fernanda"
       />

@@ -3,7 +3,7 @@ function Header() {
     <header>
       
       <img
-        src="/Port-PsiFernandaGFlores/logo.webp"
+        src="/Portif-PsiFernandaGoldoniFlores/logo.webp"
         className="logo"
         alt="Logo Fernanda G Flores"
       />
