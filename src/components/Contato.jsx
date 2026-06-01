@@ -3,7 +3,7 @@ function Contato() {
     <section id="contato">
       <h2>Contato</h2>
 
-      <p>WhatsApp - (67) 9 9890-1011 ou Instagram - @psi.fernandagoldonif</p>
+      <p>WhatsApp - (67) 9 9890-1011 ou @psi.fernandagoldonif</p>
 
     
     </section>
