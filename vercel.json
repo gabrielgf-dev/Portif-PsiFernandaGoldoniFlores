@@ -1,0 +1,28 @@
+
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": "vite",
+  "functions": {
+    "api/index.js": {
+      "includeFiles": "backend/certs/**"
+    }
+  },
+  "rewrites": [
+    {
+      "source": "/login",
+      "destination": "/api/index"
+    },
+    {
+      "source": "/projetos",
+      "destination": "/api/index"
+    },
+    {
+      "source": "/projetos/:id",
+      "destination": "/api/index"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
+}
