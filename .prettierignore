@@ -1,0 +1,13 @@
+
+node_modules/
+backend/node_modules/
+dist/
+backend/certs/
+backend/uploads/
+backend/database/
+backend/package-lock.json
+package-lock.json
+*.db
+*.crt
+.env
+.env.*

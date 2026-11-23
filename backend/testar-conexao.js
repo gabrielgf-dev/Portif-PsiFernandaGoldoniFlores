@@ -1,4 +1,3 @@
-
 require("dotenv").config();
 
 const { Client } = require("pg");
@@ -28,10 +27,8 @@ async function testarConexao() {
 
     console.log("Conexão com Supabase realizada!");
     console.log("Projetos cadastrados:", resultado.rows[0].total);
-
   } catch (erro) {
     console.error("Erro de conexão:", erro.message);
-
   } finally {
     await banco.end().catch(() => {});
   }

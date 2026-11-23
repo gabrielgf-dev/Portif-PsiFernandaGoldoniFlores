@@ -1,4 +1,3 @@
-
 require("dotenv").config();
 
 const { Client } = require("pg");
@@ -8,11 +7,7 @@ const { createClient } = require("@supabase/supabase-js");
 const fs = require("node:fs");
 const path = require("node:path");
 
-const obrigatorias = [
-  "DATABASE_URL",
-  "SUPABASE_URL",
-  "SUPABASE_SECRET_KEY"
-];
+const obrigatorias = ["DATABASE_URL", "SUPABASE_URL", "SUPABASE_SECRET_KEY"];
 
 for (const nome of obrigatorias) {
   if (!process.env[nome]) {
@@ -20,10 +15,10 @@ for (const nome of obrigatorias) {
   }
 }
 
-const sqlite = new Database(
-  path.join(__dirname, "database", "fernanda.db"),
-  { readonly: true, fileMustExist: true }
-);
+const sqlite = new Database(path.join(__dirname, "database", "fernanda.db"), {
+  readonly: true,
+  fileMustExist: true
+});
 
 const ca = fs.readFileSync(
   path.join(__dirname, "certs", "supabase-ca.crt"),
@@ -62,9 +57,7 @@ const tipos = {
 };
 
 async function migrar() {
-  const projetos = sqlite.prepare(
-    "SELECT * FROM projetos ORDER BY id"
-  ).all();
+  const projetos = sqlite.prepare("SELECT * FROM projetos ORDER BY id").all();
 
   console.log(`${projetos.length} projetos encontrados.`);
 
@@ -96,7 +89,9 @@ async function migrar() {
         });
 
       if (error) {
-        console.log(`Falha no upload do projeto ${projeto.id}: ${error.message}`);
+        console.log(
+          `Falha no upload do projeto ${projeto.id}: ${error.message}`
+        );
         continue;
       }
 

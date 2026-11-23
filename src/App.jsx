@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from "react";
 import "./App.css";
 
@@ -14,9 +13,7 @@ import Login from "./components/Login";
 function App() {
   const [token, setToken] = useState(null);
 
-  const areaAdmin =
-    import.meta.env.DEV &&
-    window.location.pathname === "/admin";
+  const areaAdmin = window.location.pathname === "/admin";
 
   useEffect(() => {
     if (areaAdmin) return;
@@ -26,10 +23,7 @@ function App() {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          entry.target.classList.toggle(
-            "mostrar",
-            entry.isIntersecting
-          );
+          entry.target.classList.toggle("mostrar", entry.isIntersecting);
         });
       },
       { threshold: 0.25 }
@@ -47,9 +41,7 @@ function App() {
           <Login onLogin={setToken} />
         ) : (
           <>
-            <button onClick={() => setToken(null)}>
-              Sair
-            </button>
+            <button onClick={() => setToken(null)}>Sair</button>
 
             <CadastroProjeto
               token={token}

@@ -1,4 +1,3 @@
-
 const { test, beforeEach } = require("node:test");
 const assert = require("node:assert/strict");
 const request = require("supertest");
@@ -8,10 +7,8 @@ const jwt = require("jsonwebtoken");
 process.env.JWT_SECRET = "segredo-exclusivo-crud";
 process.env.ADMIN_EMAIL = "teste@exemplo.com";
 process.env.ADMIN_PASSWORD_HASH = "hash-de-teste";
-process.env.DATABASE_URL =
-  "postgresql://teste:teste@localhost:5432/testes";
-process.env.SUPABASE_URL =
-  "https://exemplo.supabase.co";
+process.env.DATABASE_URL = "postgresql://teste:teste@localhost:5432/testes";
+process.env.SUPABASE_URL = "https://exemplo.supabase.co";
 process.env.SUPABASE_SECRET_KEY = "chave-ficticia";
 
 const app = require("../server");
@@ -20,11 +17,9 @@ let projetos;
 let imagens;
 let proximoId;
 
-const token = jwt.sign(
-  { tipo: "admin" },
-  process.env.JWT_SECRET,
-  { expiresIn: "1h" }
-);
+const token = jwt.sign({ tipo: "admin" }, process.env.JWT_SECRET, {
+  expiresIn: "1h"
+});
 
 const autorizacao = `Bearer ${token}`;
 
@@ -175,10 +170,7 @@ test("Edita um projeto existente", async () => {
     });
 
   assert.equal(resposta.status, 200);
-  assert.equal(
-    projetos.get(1).titulo,
-    "Título atualizado"
-  );
+  assert.equal(projetos.get(1).titulo, "Título atualizado");
 });
 
 // 4. Exclusão
@@ -205,10 +197,7 @@ test("Envia imagem para o Storage simulado", async () => {
     .attach("imagem", imagemJpg, "foto.jpg");
 
   assert.equal(resposta.status, 201);
-  assert.match(
-    resposta.body.imagem,
-    /exemplo\.supabase\.co/
-  );
+  assert.match(resposta.body.imagem, /exemplo\.supabase\.co/);
   assert.equal(imagens.size, 1);
 });
 
@@ -233,4 +222,3 @@ test("Rejeita identificador inválido", async () => {
 
   assert.equal(resposta.status, 400);
 });
-

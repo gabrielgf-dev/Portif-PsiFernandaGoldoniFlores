@@ -1,36 +1,28 @@
 function Home() {
   return (
     <section id="home" className="home">
-      
       <div className="home-texto">
         <p className="subtitulo">Psicóloga Clínica</p>
 
         <h1>Fernanda</h1>
         <h2>Goldoni Flores</h2>
-        <p>
-          Um cuidado construído pela escuta.
-        </p>
+        <p>Um cuidado construído pela escuta.</p>
 
         <a
-  href="https://wa.me/5567998901011"
-  target="_blank"
-  rel="noopener noreferrer"
-  className="botao-whats"
->
-  Agendar horário
-</a>
+          href="https://wa.me/5567998901011"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="botao-whats"
+        >
+          Agendar horário
+        </a>
       </div>
 
       <div className="home-imagem">
-        <img
-          src="/FerHome.webp"
-          className="foto-home"
-          alt="Fernanda"
-        />
+        <img src="/FerHome.webp" className="foto-home" alt="Fernanda" />
       </div>
-
     </section>
-  )
+  );
 }
 
-export default Home
+export default Home;

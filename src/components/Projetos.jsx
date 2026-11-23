@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from "react";
 import "./Projetos.css";
 
@@ -33,8 +32,8 @@ function Projetos() {
       <h2>Projetos e Experiências</h2>
 
       <p className="projetos-introducao">
-        Conheça projetos e experiências desenvolvidos
-        ao longo da minha trajetória profissional.
+        Conheça projetos e experiências desenvolvidos ao longo da minha
+        trajetória profissional.
       </p>
 
       {carregando && <p>Carregando projetos...</p>}
@@ -44,7 +43,6 @@ function Projetos() {
       <div className="projetos-grid">
         {projetos.map((projeto) => (
           <article className="projeto-card" key={projeto.id}>
-
             <div className="projeto-imagem">
               {projeto.imagem ? (
                 <img src={projeto.imagem} alt={projeto.titulo} />
@@ -57,7 +55,6 @@ function Projetos() {
               <h3>{projeto.titulo}</h3>
               <p>{projeto.descricao}</p>
             </div>
-
           </article>
         ))}
       </div>

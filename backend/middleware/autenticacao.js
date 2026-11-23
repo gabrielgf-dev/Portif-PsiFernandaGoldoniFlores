@@ -1,4 +1,3 @@
-
 const jwt = require("jsonwebtoken");
 
 function autenticar(req, res, next) {
@@ -11,11 +10,9 @@ function autenticar(req, res, next) {
   }
 
   try {
-    const usuario = jwt.verify(
-      token,
-      process.env.JWT_SECRET,
-      { algorithms: ["HS256"] }
-    );
+    const usuario = jwt.verify(token, process.env.JWT_SECRET, {
+      algorithms: ["HS256"]
+    });
 
     if (usuario.tipo !== "admin") {
       return res.status(403).json({
@@ -25,7 +22,6 @@ function autenticar(req, res, next) {
 
     req.usuario = usuario;
     next();
-
   } catch {
     return res.status(401).json({
       erro: "Sessão inválida ou expirada."

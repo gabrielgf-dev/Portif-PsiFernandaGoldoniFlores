@@ -1,4 +1,3 @@
-
 const { test } = require("node:test");
 const assert = require("node:assert/strict");
 const express = require("express");
@@ -50,11 +49,9 @@ test("Bloqueia token inválido", async () => {
 
 // TESTE 3: token válido
 test("Permite acesso com token válido", async () => {
-  const token = jwt.sign(
-    { tipo: "admin" },
-    process.env.JWT_SECRET,
-    { expiresIn: "1h" }
-  );
+  const token = jwt.sign({ tipo: "admin" }, process.env.JWT_SECRET, {
+    expiresIn: "1h"
+  });
 
   const resposta = await request(app)
     .post("/projetos")
@@ -66,11 +63,9 @@ test("Permite acesso com token válido", async () => {
 
 // TESTE 4: token expirado
 test("Bloqueia token expirado", async () => {
-  const token = jwt.sign(
-    { tipo: "admin" },
-    process.env.JWT_SECRET,
-    { expiresIn: -1 }
-  );
+  const token = jwt.sign({ tipo: "admin" }, process.env.JWT_SECRET, {
+    expiresIn: -1
+  });
 
   const resposta = await request(app)
     .delete("/projetos/1")
@@ -81,8 +76,7 @@ test("Bloqueia token expirado", async () => {
 
 // TESTE 5: exclusão sem autorização
 test("Impede exclusão sem login", async () => {
-  const resposta = await request(app)
-    .delete("/projetos/1");
+  const resposta = await request(app).delete("/projetos/1");
 
   assert.ok(resposta.status >= 400 && resposta.status < 500);
 });

@@ -1,5 +1,4 @@
-﻿
-require("dotenv").config();
+﻿require("dotenv").config();
 
 const express = require("express");
 const bcrypt = require("bcryptjs");
@@ -12,7 +11,7 @@ const { Pool } = require("pg");
 const { createClient } = require("@supabase/supabase-js");
 const autenticar = require("./middleware/autenticacao");
 
-// Verifica as configuraÃ§Ãµes necessÃ¡rias
+// Verifica as configurações necessárias
 const obrigatorias = [
   "JWT_SECRET",
   "ADMIN_EMAIL",
@@ -31,15 +30,10 @@ for (const nome of obrigatorias) {
 const app = express();
 app.use(express.json({ limit: "20kb" }));
 
-// ConexÃ£o segura com PostgreSQL
+// Conexão segura com PostgreSQL
 const urlBanco = new URL(process.env.DATABASE_URL);
 
-for (const parametro of [
-  "sslmode",
-  "sslrootcert",
-  "sslcert",
-  "sslkey"
-]) {
+for (const parametro of ["sslmode", "sslrootcert", "sslcert", "sslkey"]) {
   urlBanco.searchParams.delete(parametro);
 }
 
@@ -58,7 +52,7 @@ const banco = new Pool({
   connectionTimeoutMillis: 10000
 });
 
-// ConexÃ£o com Supabase Storage
+// Conexão com Supabase Storage
 const supabase = createClient(
   process.env.SUPABASE_URL,
   process.env.SUPABASE_SECRET_KEY,
@@ -73,7 +67,7 @@ app.locals.banco = banco;
 app.locals.supabase = supabase;
 const bucket = "projetos-imagens";
 
-// ConfiguraÃ§Ã£o das imagens
+// Configuração das imagens
 const upload = multer({
   storage: multer.memoryStorage(),
   limits: {
@@ -82,22 +76,19 @@ const upload = multer({
 });
 
 function extensaoImagem(buffer) {
-  if (
-    buffer.subarray(0, 3).equals(
-      Buffer.from([0xff, 0xd8, 0xff])
-    )
-  ) return ".jpg";
+  if (buffer.subarray(0, 3).equals(Buffer.from([0xff, 0xd8, 0xff])))
+    return ".jpg";
 
   if (
-    buffer.subarray(0, 8).equals(
-      Buffer.from([137, 80, 78, 71, 13, 10, 26, 10])
-    )
-  ) return ".png";
+    buffer.subarray(0, 8).equals(Buffer.from([137, 80, 78, 71, 13, 10, 26, 10]))
+  )
+    return ".png";
 
   if (
     buffer.toString("ascii", 0, 4) === "RIFF" &&
     buffer.toString("ascii", 8, 12) === "WEBP"
-  ) return ".webp";
+  )
+    return ".webp";
 
   return null;
 }
@@ -114,13 +105,10 @@ async function salvarImagem(arquivo) {
   const extensao = extensaoImagem(arquivo.buffer);
 
   if (!extensao) {
-    throw erroUsuario(
-      "Formato de imagem invÃ¡lido. Use JPG, PNG ou WebP."
-    );
+    throw erroUsuario("Formato de imagem inválido. Use JPG, PNG ou WebP.");
   }
 
-  const caminho =
-    `projetos/${crypto.randomUUID()}${extensao}`;
+  const caminho = `projetos/${crypto.randomUUID()}${extensao}`;
 
   const tipos = {
     ".jpg": "image/jpeg",
@@ -136,9 +124,7 @@ async function salvarImagem(arquivo) {
     });
 
   if (error) {
-    throw new Error(
-      `Erro ao enviar imagem: ${error.message}`
-    );
+    throw new Error(`Erro ao enviar imagem: ${error.message}`);
   }
 
   const { data } = app.locals.supabase.storage
@@ -157,9 +143,7 @@ function caminhoImagem(imagem) {
 
   if (!imagem.startsWith(prefixo)) return null;
 
-  const caminho = imagem
-    .slice(prefixo.length)
-    .split("?")[0];
+  const caminho = imagem.slice(prefixo.length).split("?")[0];
 
   if (!caminho || caminho.includes("..")) {
     return null;
@@ -178,25 +162,20 @@ async function excluirImagem(imagem) {
     .remove([caminho]);
 
   if (error) {
-    throw new Error(
-      `Erro ao excluir imagem: ${error.message}`
-    );
+    throw new Error(`Erro ao excluir imagem: ${error.message}`);
   }
 }
 
-// Permite tratar erros em operaÃ§Ãµes assÃ­ncronas
+// Permite tratar erros em operações assíncronas
 function executar(operacao) {
   return (req, res, next) =>
-    Promise.resolve(operacao(req, res, next))
-      .catch(next);
+    Promise.resolve(operacao(req, res, next)).catch(next);
 }
 
 function idValido(valor) {
   const id = Number(valor);
 
-  return Number.isSafeInteger(id) && id > 0
-    ? id
-    : null;
+  return Number.isSafeInteger(id) && id > 0 ? id : null;
 }
 
 function validarTexto(req, res) {
@@ -230,18 +209,14 @@ app.get("/", (req, res) => {
 app.post("/login", (req, res) => {
   const { email, senha } = req.body || {};
 
-  if (
-    typeof email !== "string" ||
-    typeof senha !== "string"
-  ) {
+  if (typeof email !== "string" || typeof senha !== "string") {
     return res.status(400).json({
       erro: "Informe e-mail e senha."
     });
   }
 
   const emailCorreto =
-    email.trim().toLowerCase() ===
-    process.env.ADMIN_EMAIL.trim().toLowerCase();
+    email.trim().toLowerCase() === process.env.ADMIN_EMAIL.trim().toLowerCase();
 
   const senhaCorreta = bcrypt.compareSync(
     senha,
@@ -250,30 +225,29 @@ app.post("/login", (req, res) => {
 
   if (!emailCorreto || !senhaCorreta) {
     return res.status(401).json({
-      erro: "Credenciais invÃ¡lidas."
+      erro: "Credenciais inválidas."
     });
   }
 
-  const token = jwt.sign(
-    { tipo: "admin" },
-    process.env.JWT_SECRET,
-    {
-      algorithm: "HS256",
-      expiresIn: "1h"
-    }
-  );
+  const token = jwt.sign({ tipo: "admin" }, process.env.JWT_SECRET, {
+    algorithm: "HS256",
+    expiresIn: "1h"
+  });
 
   res.json({ token });
 });
 
 // Listar projetos
-app.get("/projetos", executar(async (req, res) => {
-  const resultado = await app.locals.banco.query(
-    "SELECT * FROM projetos ORDER BY id DESC"
-  );
+app.get(
+  "/projetos",
+  executar(async (req, res) => {
+    const resultado = await app.locals.banco.query(
+      "SELECT * FROM projetos ORDER BY id DESC"
+    );
 
-  res.json(resultado.rows);
-}));
+    res.json(resultado.rows);
+  })
+);
 
 // Cadastrar projeto
 app.post(
@@ -295,22 +269,14 @@ app.post(
          (titulo, descricao, imagem)
          VALUES ($1, $2, $3)
          RETURNING *`,
-        [
-          dados.titulo,
-          dados.descricao,
-          imagem
-        ]
+        [dados.titulo, dados.descricao, imagem]
       );
 
       res.status(201).json(resultado.rows[0]);
-
     } catch (erro) {
       if (imagem) {
-        await excluirImagem(imagem).catch(e =>
-          console.error(
-            "Falha na limpeza:",
-            e.message
-          )
+        await excluirImagem(imagem).catch((e) =>
+          console.error("Falha na limpeza:", e.message)
         );
       }
 
@@ -329,7 +295,7 @@ app.put(
 
     if (!id) {
       return res.status(400).json({
-        erro: "Identificador invÃ¡lido."
+        erro: "Identificador inválido."
       });
     }
 
@@ -344,12 +310,11 @@ app.put(
 
     if (!existente.rows.length) {
       return res.status(404).json({
-        erro: "Projeto nÃ£o encontrado."
+        erro: "Projeto não encontrado."
       });
     }
 
-    const imagemAnterior =
-      existente.rows[0].imagem;
+    const imagemAnterior = existente.rows[0].imagem;
 
     let novaImagem = null;
 
@@ -358,8 +323,7 @@ app.put(
         novaImagem = await salvarImagem(req.file);
       }
 
-      const imagem =
-        novaImagem || imagemAnterior;
+      const imagem = novaImagem || imagemAnterior;
 
       const resultado = await app.locals.banco.query(
         `UPDATE projetos
@@ -368,12 +332,7 @@ app.put(
              imagem = $3
          WHERE id = $4
          RETURNING *`,
-        [
-          dados.titulo,
-          dados.descricao,
-          imagem,
-          id
-        ]
+        [dados.titulo, dados.descricao, imagem, id]
       );
 
       if (!resultado.rows.length) {
@@ -382,31 +341,22 @@ app.put(
         }
 
         return res.status(404).json({
-          erro: "Projeto nÃ£o encontrado."
+          erro: "Projeto não encontrado."
         });
       }
 
       if (novaImagem && imagemAnterior) {
-        excluirImagem(imagemAnterior)
-          .catch(e =>
-            console.error(
-              "Falha ao remover imagem antiga:",
-              e.message
-            )
-          );
+        excluirImagem(imagemAnterior).catch((e) =>
+          console.error("Falha ao remover imagem antiga:", e.message)
+        );
       }
 
       res.json(resultado.rows[0]);
-
     } catch (erro) {
       if (novaImagem) {
-        await excluirImagem(novaImagem)
-          .catch(e =>
-            console.error(
-              "Falha na limpeza:",
-              e.message
-            )
-          );
+        await excluirImagem(novaImagem).catch((e) =>
+          console.error("Falha na limpeza:", e.message)
+        );
       }
 
       throw erro;
@@ -423,7 +373,7 @@ app.delete(
 
     if (!id) {
       return res.status(400).json({
-        erro: "Identificador invÃ¡lido."
+        erro: "Identificador inválido."
       });
     }
 
@@ -436,24 +386,20 @@ app.delete(
 
     if (!resultado.rows.length) {
       return res.status(404).json({
-        erro: "Projeto nÃ£o encontrado."
+        erro: "Projeto não encontrado."
       });
     }
 
     const imagem = resultado.rows[0].imagem;
 
     if (imagem) {
-      excluirImagem(imagem)
-        .catch(e =>
-          console.error(
-            "Falha ao remover imagem:",
-            e.message
-          )
-        );
+      excluirImagem(imagem).catch((e) =>
+        console.error("Falha ao remover imagem:", e.message)
+      );
     }
 
     res.json({
-      mensagem: "Projeto excluÃ­do com sucesso!"
+      mensagem: "Projeto excluído com sucesso!"
     });
   })
 );
@@ -469,40 +415,27 @@ app.use((erro, req, res, next) => {
   console.error("Erro na API:", erro);
 
   res.status(erro.status || 500).json({
-    erro: erro.status === 400
-      ? erro.message
-      : "Erro interno do servidor."
+    erro: erro.status === 400 ? erro.message : "Erro interno do servidor."
   });
 });
 
-// Iniciar servidor apÃ³s verificar o banco
+// Iniciar servidor após verificar o banco
 async function iniciar() {
-  await app.locals.banco.query(
-    "SELECT 1 FROM projetos LIMIT 1"
-  );
+  await app.locals.banco.query("SELECT 1 FROM projetos LIMIT 1");
 
-  const porta =
-    Number(process.env.PORT) || 3000;
+  const porta = Number(process.env.PORT) || 3000;
 
   app.listen(porta, () => {
-    console.log(
-      `Servidor rodando na porta ${porta} (Supabase)`
-    );
+    console.log(`Servidor rodando na porta ${porta} (Supabase)`);
   });
 }
 
-
 if (require.main === module) {
-  iniciar().catch(erro => {
-    console.error(
-      "NÃ£o foi possÃ­vel conectar ao Supabase:",
-      erro.message
-    );
+  iniciar().catch((erro) => {
+    console.error("Não foi possÃ­vel conectar ao Supabase:", erro.message);
 
     process.exit(1);
   });
 }
 
 module.exports = app;
-
-

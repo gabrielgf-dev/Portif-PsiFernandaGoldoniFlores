@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from "react";
 
 function CadastroProjeto({ token, onSessaoExpirada }) {
@@ -60,9 +59,7 @@ function CadastroProjeto({ token, onSessaoExpirada }) {
 
     const editando = editandoId !== null;
 
-    const endereco = editando
-      ? `/projetos/${editandoId}`
-      : "/projetos";
+    const endereco = editando ? `/projetos/${editandoId}` : "/projetos";
 
     try {
       const resposta = await fetch(endereco, {
@@ -93,7 +90,6 @@ function CadastroProjeto({ token, onSessaoExpirada }) {
       limparFormulario();
       evento.target.reset();
       await carregarProjetos();
-
     } catch (erro) {
       setMensagem(erro.message);
     } finally {
@@ -102,9 +98,7 @@ function CadastroProjeto({ token, onSessaoExpirada }) {
   }
 
   async function excluirProjeto(id) {
-    const confirmado = window.confirm(
-      "Deseja realmente excluir este projeto?"
-    );
+    const confirmado = window.confirm("Deseja realmente excluir este projeto?");
 
     if (!confirmado) return;
 
@@ -133,7 +127,6 @@ function CadastroProjeto({ token, onSessaoExpirada }) {
 
       setMensagem("Projeto excluído com sucesso!");
       await carregarProjetos();
-
     } catch (erro) {
       setMensagem(erro.message);
     }
@@ -141,11 +134,7 @@ function CadastroProjeto({ token, onSessaoExpirada }) {
 
   return (
     <div>
-      <h2>
-        {editandoId !== null
-          ? "Editar projeto"
-          : "Cadastrar projeto"}
-      </h2>
+      <h2>{editandoId !== null ? "Editar projeto" : "Cadastrar projeto"}</h2>
 
       <form onSubmit={salvarProjeto}>
         <label htmlFor="titulo-projeto">Título</label>
@@ -174,9 +163,7 @@ function CadastroProjeto({ token, onSessaoExpirada }) {
           id="imagem-projeto"
           type="file"
           accept="image/jpeg,image/png,image/webp"
-          onChange={(e) =>
-            setImagem(e.target.files[0] || null)
-          }
+          onChange={(e) => setImagem(e.target.files[0] || null)}
         />
 
         <button type="submit" disabled={salvando}>
@@ -219,17 +206,11 @@ function CadastroProjeto({ token, onSessaoExpirada }) {
           )}
 
           <div>
-            <button
-              type="button"
-              onClick={() => iniciarEdicao(projeto)}
-            >
+            <button type="button" onClick={() => iniciarEdicao(projeto)}>
               Editar
             </button>
 
-            <button
-              type="button"
-              onClick={() => excluirProjeto(projeto.id)}
-            >
+            <button type="button" onClick={() => excluirProjeto(projeto.id)}>
               Excluir
             </button>
           </div>
